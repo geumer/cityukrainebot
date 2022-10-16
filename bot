@@ -1,0 +1,1505 @@
+from email import message 
+from email.mime import image
+import logging
+from tkinter import PhotoImage, image_names, image_types
+from telegram import Chat, Update
+from telegram.ext import CallbackContext, CommandHandler, Updater, MessageHandler, Filters
+import requests 
+import webbrowser
+from PIL import Image
+
+
+
+# States
+START = 1
+City_1 = 2
+City_2 = 3
+City_3 = 4
+City_4 = 5
+City_5 = 6
+City_6 = 7
+City_7 = 8
+City_8 = 9
+City_9 = 10
+City_10 = 11
+City_11 = 12
+City_12 = 13
+City_13 = 14
+City_14 = 15
+City_15 = 16
+City_16 = 17
+City_17 = 18
+City_18 = 19
+City_19 = 20
+City_20 = 21
+City_21 = 22
+City_22 = 23
+City_23 = 24
+City_24 = 25
+City_25 = 26
+City_26 = 27
+
+user_states = {}
+
+updater = Updater(token="5644375423:AAGad5kvmZVpszU1fzi1eZxylba3lQs_1Wk", use_context=True)
+dispatcher = updater.dispatcher
+
+def start_command_handler(update: Update, context: CallbackContext):
+    global user_states
+    
+    user_id = update.effective_chat.id
+    
+    # If user not in states - add him / her
+    if user_id not in user_states:
+        user_states[user_id] = START
+        
+    print(f"[/start]: current user state: {user_states[user_id]}")
+    
+    # Check state of current user
+    if user_states[user_id] == START:
+        text = "Перевіримо як ти знєш міста України?\n1: Так\n2: Ні"
+        url1='https://chas.cv.ua/wp-content/uploads/2022/03/Ukraine-Map-400.png'
+        img1=url1
+        context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+        context.bot.send_photo(chat_id=update.effective_chat.id, photo=img1)
+        user_states[user_id] +=1
+    else:
+        pass
+
+def text_message_handler(update: Update, context: CallbackContext):
+    message = update.message.text
+    user_id = update.effective_chat.id
+    
+    
+    global user_states
+    
+    print(f"[text]: current user state: {user_states[user_id]}")
+    
+    if user_states[user_id] == City_1:
+        if message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Хороший вибір\nЩо це за Місто" )
+            text = "\n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            img2="https://hotel-edem.lviv.ua/wp-content/uploads/2019/07/ukraina-lviv-teatr-opery-i-baletu.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img2)
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Поганий вибір")
+            user_states[user_id] = 1
+            text = "Гра закінчилась. Введіть /start, щоб почати знову."
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+    elif user_states[user_id] == City_2:
+        if message == "1":
+            img3="https://media-cdn.tripadvisor.com/media/photo-s/12/c7/0f/23/caption.jpg"
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img3)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_3:
+        if message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img4="https://t1.ua/photos/articles/2019/10/35403_1_1097.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img4)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_4:
+        if message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img5="https://ukr-prokat.com/wp-content/uploads/2020/08/ivano-frankivsk.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img5)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_5:
+        if message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img6="https://kiyavia.com/files/TravelProviderInUkraine/ekskursii-po-ukraini/Chernigov_1000.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img6)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_6:
+        if message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img7="https://ua.igotoworld.com/frontend/webcontent/websites/1/images/1022059_800x600_odessa3.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img7)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_7:
+        if message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img8="https://anga.ua/ifiles/images/kyiv/tsikavi_fakty_pro_kyiv/Screenshot_2(1).png"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img8)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_8:
+        if message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img9="https://moemisto.ua/uploads/media/ckeditor/0004/16/ff29615cec3b3f4525ac653ed5f7332ab367eb70.jpeg?hash=2019-05-07-11-42-02"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img9)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_9:
+        if message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img10="https://ksma.ks.ua/wp-content/uploads/2020/12/beacon.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img10)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_10:
+        if message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img11="https://upload.wikimedia.org/wikipedia/commons/d/d3/P1480854_вул._Велика_Перспективна_%28К._Маркса%29%2C_33.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img11)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_11:
+        if message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img12="https://img.pravda.com/images/doc/5/b/5bbe65d-photo-2022-03-12-22-17-03.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img12)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_12:
+        if message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img13="https://mkrada.gov.ua/files/368/Images_for_site/chkalov.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img13)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_13:
+        if message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img14="https://litsa.com.ua/wp-content/uploads/2020/07/14-55f6d4d9ad4fe-dnipropetrovsk__misto_kozatskogo_rodu.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img14)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_14:
+        if message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img15="https://texty.org.ua/before_christ/orig/46/46920.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img15)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_15:
+        if message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img16="https://blog.pokupon.ua/wp-content/uploads/2021/02/hosprom-panorama-1024x689.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img16)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_16:
+        if message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img17="https://data.kontrakty.ua/cache/www/450,0/images/stories/zag.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img17)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_17:
+        if message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img18="https://zmi.ck.ua/uploaded/pic/news/1575965037-317.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img18)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_18:
+        if message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img19="https://zt.20minut.ua/img/cache/news_new_m/news/0021/09/2008014-chomu-same-zhitomir-legendi-pro-pohodzhennya-nazvi-mista.jpeg?hash=2020-11-20-12-01-07"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img19)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_19:
+        if message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img20="https://upload.wikimedia.org/wikipedia/commons/3/32/Театральна_площа_%28Рівне%29.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img20)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_20:
+        if message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img21="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Chernivtsi_University.jpg/1000px-Chernivtsi_University.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img21)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_21:
+        if message == "8":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img22="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/VinnytsiaCityTower.jpg/290px-VinnytsiaCityTower.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img22)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_22:
+        if message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img23="https://stingray-market.com.ua/files/uploads/Poltava.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img23)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_23:
+        if message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img24="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Нічний_проспект.jpg/275px-Нічний_проспект.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img24)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_24:
+        if message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img25="https://img.eurointegration.com.ua/images/doc/e/2/e262172-705.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img25)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_25:
+        if message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            img26="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Музей_истории_Луганска.jpg/280px-Музей_истории_Луганска.jpg"
+            context.bot.send_photo(chat_id=update.effective_chat.id, photo=img26)
+            text = "Що це за місто \n1: Львів \r2: Луцьк \r3: Ужгорож \r4: Івано-Франківськ \r5: Тернопіль\r6: Рівне \r7: Хмельницьк \r8: Чернівці \r9: Житомер \r10: Вінниця\r11: Київ \r12: Черкаси \r13: Чернігів \r14: Суми \r15: Полтава \r16: Харків \r17: Луганьськ \r18: Донецьк \r19: Запоріжжя \r20: Дніпропетровськ \r21 Кіровоград \r22 Миколаїв \r23 Херсон \r24 Одеса \r25 Крим"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] += 1
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    elif user_states[user_id] == City_26:
+        if message == "17":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Правельно")
+            text = "Вітаю ти пройшов гру Вгадай Місто України. \nПіди купи морозиво"
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+            user_states[user_id] = 1
+            text = "Гра закінчилась. Введіть /start, щоб почати знову."
+            context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+        elif message == "2":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "1":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "3":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "11":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "9":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "19":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "6":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "12":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "24":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "14":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "4":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "16":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "10":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "18":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "7":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "20":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "15":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "22":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "25":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "23":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "21":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "13":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+        elif message == "5":
+            context.bot.send_message(chat_id=update.effective_chat.id, text="Неправельно Спобуй Ще раз")
+    else:
+        pass
+
+start_handler = CommandHandler('start', start_command_handler)
+dispatcher.add_handler(start_handler)
+
+echo_handler = MessageHandler(Filters.text & ~Filters.command, text_message_handler)
+dispatcher.add_handler(echo_handler)
+
+# Start bot
+updater.start_polling()
